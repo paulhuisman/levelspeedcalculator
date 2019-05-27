@@ -120,7 +120,7 @@ select option {
 
 .box::before {
   content: '';
-  background: url('../images/a-t.png') no-repeat 0 0;
+  background: url('../images/arrow-down.png') no-repeat 0 0;
   position: absolute;
   background-size: 20px 12px;
   top: 20px;
