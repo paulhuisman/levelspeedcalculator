@@ -24,7 +24,7 @@ var app = new Vue({
         sm.style.display = 'block';
         this.success_message = `
           A ${this.leveling_class} is a ${getClassRate(this.leveling_class).descr} leveling class.
-          If you are playing an average of ${this.hours_per_week} hours per week and your leveling speed is ${this.leveling_speed} you will ding level 60 on...<p>${ding_date} !</p>
+          If you are playing an average of ${this.hours_per_week} hours per week and your leveling speed is ${this.leveling_speed} you will ding level 60 on...<p>${ding_date}</p>
         `;
       }
       else {
