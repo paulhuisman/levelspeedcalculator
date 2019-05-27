@@ -192,7 +192,7 @@ footer a {
   background-image: linear-gradient(to bottom, #13527e, #176ba6);
   border-radius: 4px;
   text-align: center;
-  padding: 15px;
+  padding: 20px 16px;
   color: #fff;
   border: 0;
   margin-top: 1rem;
@@ -209,6 +209,7 @@ footer a {
   font-weight: bold;
   display: block;
   font-size: 1.8rem;
+  margin-bottom: 0;
 }
 
 @keyframes fade-in {
