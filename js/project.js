@@ -21,18 +21,20 @@ var app = new Vue({
         document.querySelector('.error-message').style.display = 'none';
 
         // Calc ding date and show success message
-        let ding_date = calcDingDate(this.leveling_class, this.leveling_speed, this.hours_per_week, this.start_date);
+        let info = calcDingDate(this.leveling_class, this.leveling_speed, this.hours_per_week, this.start_date);
         
         document.querySelector('.success-message').style.display = 'block';
+        let day_months_info = info.months > 1 ? `${roundToOne(info.months)} months` : `${Math.round(info.days)} days`;
         this.success_message = `
           A <strong>${this.leveling_class}</strong> is a ${getClassRate(this.leveling_class).descr} leveling class.
-          If you are playing an average of <strong>${this.hours_per_week} hours per week</strong> and your leveling speed is <strong>${this.leveling_speed}</strong> you will probably ding level 60 somewhere around...<p>${ding_date}</p>
+          If you are playing an average of <strong>${this.hours_per_week} hours per week</strong> and your leveling speed is <strong>${this.leveling_speed}</strong> you will probably ding level 60 somewhere around...<p>${info.ding_date_formatted}</p>
+          <span class="small">(this will be ${day_months_info} from when you start playing on ${info.start_date_formatted})</span>
         `;
 
         // Push event to GA
         gtag('event', 'Successful', {
           'event_category': 'Calculate',
-          'event_label': this.leveling_class + ' - ' + ding_date
+          'event_label': this.leveling_class + ' - ' + info.ding_date_formatted
         });
       }
       else {
@@ -67,7 +69,14 @@ function calcDingDate(leveling_class, leveling_speed, hours_per_week, start_date
   // Add days to starting date
   let date = new Date(start_date);
   date.add(days).days();
-  return date.toString('dddd d MMMM yyyy');  
+
+  return {
+    start_date_formatted: new Date(start_date).toString('d MMMM yyyy'),
+    ding_date_formatted: date.toString('dddd d MMMM yyyy'),
+    // month average is 30,4
+    months: days / 30.4,
+    days: days
+  };
 }
 
 function getClassRate(leveling_class) {
@@ -118,7 +127,6 @@ function getClassRate(leveling_class) {
 }
 
 function getHoursNeeded(leveling_speed) {
-
   const leveling_speed_days = {
     'very-slow': 24,
     'slow': 17,
@@ -133,4 +141,8 @@ function getHoursNeeded(leveling_speed) {
   }
   
   return false;
+}
+
+function roundToOne(num) {    
+  return +(Math.round(num + "e+1")  + "e-1");
 }
