@@ -45,12 +45,6 @@ var app = new Vue({
         document.querySelector('.error-message').style.display = 'block';
         this.error_message = 'Please fill in all fields to get a calculation.';
       }
-
-    },
-    removeSkill(index) {
-      if (this.skills[index]) {
-        this.skills.splice(index, 1);
-      }
     }
   }
 })
