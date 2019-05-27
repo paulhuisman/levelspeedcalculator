@@ -76,11 +76,11 @@ function calcDingDate(leveling_class, leveling_speed, hours_per_week, start_date
 function getClassRate(leveling_class) {
   const rates = {
     'warrior': {
-      multiplier: 1.4,
+      multiplier: 1.3,
       descr: 'slow',
     },
     'rogue': {
-      multiplier: 1.3,
+      multiplier: 1.2,
       descr: 'medium-slow'
     },
     'hunter': {
@@ -88,27 +88,27 @@ function getClassRate(leveling_class) {
       descr: 'fast'
     },
     'warlock': {
-      multiplier: 1.15,
+      multiplier: 1.1,
       descr: 'medium-fast'
     },
     'mage': {
-      multiplier: 1.15,
+      multiplier: 1.1,
       descr: 'medium-fast'
     },
     'priest': { 
-      multiplier: 1.2,
+      multiplier: 1.1,
       descr: 'medium-speed'
     },
     'shaman': {
-      multiplier: 1.3,
+      multiplier: 1.2,
       descr: 'medium-slow'
     },
     'druid': {
-      multiplier: 1.1,
+      multiplier: 1.05,
       descr: 'fast'
     },
     'paladin': {
-      multiplier: 1.35,
+      multiplier: 1.25,
       descr: 'slow'
     },
   };
