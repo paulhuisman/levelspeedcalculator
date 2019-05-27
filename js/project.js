@@ -36,11 +36,12 @@ var app = new Vue({
       this.error_message = '';
       document.querySelector('.error-message').style.display = 'none';
 
-      // Calc ding date and show success message
+      // Calc ding date and day_months_info
       let info = calcDingDate(this.leveling_class, this.leveling_speed, this.hours_per_week, this.start_date);
-      
-      document.querySelector('.success-message').style.display = 'block';
       let day_months_info = info.months > 1 ? `${roundToOne(info.months)} months` : `${Math.round(info.days)} days`;
+      
+      // Show success message with calculated info
+      document.querySelector('.success-message').style.display = 'block';
       this.success_message = `
         A <strong>${this.leveling_class}</strong> is a ${getClassRate(this.leveling_class).descr} leveling class.
         If you are playing an average of <strong>${this.hours_per_week} hours per week</strong> and your leveling speed is <strong>${this.leveling_speed}</strong> you will probably ding level 60 somewhere around...<p>${info.ding_date_formatted}</p>
