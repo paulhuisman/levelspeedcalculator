@@ -32,7 +32,7 @@ var app = new Vue({
         // Push event to GA
         gtag('event', 'Successful', {
           'event_category': 'Calculate',
-          'event_label': this.leveling_class + '-' + ding_date
+          'event_label': this.leveling_class + ' - ' + ding_date
         });
       }
       else {
