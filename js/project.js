@@ -28,6 +28,13 @@ var app = new Vue({
           A <strong>${this.leveling_class}</strong> is a ${getClassRate(this.leveling_class).descr} leveling class.
           If you are playing an average of <strong>${this.hours_per_week} hours per week</strong> and your leveling speed is <strong>${this.leveling_speed}</strong> you will probably ding level 60 somewhere around...<p>${ding_date}</p>
         `;
+
+        // Push event to GA
+        ga('send', 'event', {
+          eventCategory: 'Calculations',
+          eventAction: 'Done',
+          eventLabel: this.leveling_class + '-' + ding_date
+        });
       }
       else {
         this.success_message = '';
