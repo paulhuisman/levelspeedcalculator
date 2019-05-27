@@ -41,7 +41,7 @@
       <p>What class will you be playing?</p>
       <div class="box">
         <select v-model="leveling_class" placeholder="Select class">
-          <option value="">- select class -</option>
+          <option value="" selected disabled>- select class -</option>
           <option value="warrior">Warrior</option>
           <option value="rogue">Rogue</option>
           <option value="hunter">Hunter</option>
@@ -57,7 +57,7 @@
       <p>How fast a leveler are you?</p>
       <div class="box">
         <select v-model="leveling_speed" placeholder="Leveling speed">
-          <option value="">- select leveling speed -</option>
+          <option value="" selected disabled>- select leveling speed -</option>
           <option value="slow">Very slow (you spend a lot of time in cities)</option>
           <option value="slow">Slow (new to the game and/or enjoying quests)</option>
           <option value="normal">Normal</option>
