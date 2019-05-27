@@ -23,7 +23,7 @@ var app = new Vue({
         this.error_message = toggleErrorMessage('Date format should be YYYY-MM-DD.');
         return;
       }
-      else if(this.start_date < '2019-08-27') {
+      else if(this.start_date < '2019-08-26') {
         this.error_message = toggleErrorMessage('Start date cannot be before release..');
         return;
       }
