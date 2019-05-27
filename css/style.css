@@ -22,11 +22,11 @@ html {
 @media only screen and (min-width: 600px) {
   #app {
     width: 50%;
-    max-width: 580px;
+    max-width: 520px;
   }
 }
 h1 {
-  margin: 0;
+  margin: 6px 0 0 0;
 }
 h1 img {
   max-width: 100%;
@@ -172,7 +172,7 @@ footer a {
 @media only screen and (min-width: 600px) {
   footer .content {
     width: 50%;
-    max-width: 580px;
+    max-width: 520px;
   }
 }
 
