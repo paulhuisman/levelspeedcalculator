@@ -122,14 +122,20 @@ select option {
   content: '';
   background: url('../images/arrow-down.png') no-repeat 0 0;
   position: absolute;
-  top: 11px;
+  top: 13px;
   right: 0;
-  width: 46px;
+  width: 42px;
   height: 100%;
   z-index: 999;
   color: #000;
   pointer-events: none;
 }
+@media only screen and (min-width: 600px) {
+  .box::before {
+    top: 15px;
+  }
+}
+
 
 .box:hover::before {
   background: url('../images/arrow-down2.png') no-repeat 0 0;
