@@ -12,7 +12,7 @@ var app = new Vue({
   methods: {
     calcLevelingTime(skill) {
       // Scroll to messages-box div (especially useful on mobile)
-      var el = document.getElementById('messages-box');
+      var el = document.getElementById('submitter');
       el.scrollIntoView();
     
       if (this.leveling_class.length && this.leveling_speed.length && this.hours_per_week.length && this.start_date.length) {
