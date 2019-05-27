@@ -11,17 +11,19 @@ var app = new Vue({
   },
   methods: {
     calcLevelingTime(skill) {
-      if (typeof this.leveling_class  !== 'undefined' && this.leveling_speed.length && this.hours_per_week.length && this.start_date.length) {
+      // Scroll to messages-box div (especially useful on mobile)
+      var el = document.getElementById('messages-box');
+      el.scrollIntoView();
+    
+      if (this.leveling_class.length && this.leveling_speed.length && this.hours_per_week.length && this.start_date.length) {
         // Remove error messages
         this.error_message = '';
-        let em = document.querySelector('.error-message');
-        em.style.display = 'none';
+        document.querySelector('.error-message').style.display = 'none';
 
         // Calc ding date and show success message
         let ding_date = calcDingDate(this.leveling_class, this.leveling_speed, this.hours_per_week, this.start_date);
         
-        sm = document.querySelector('.success-message');
-        sm.style.display = 'block';
+        document.querySelector('.success-message').style.display = 'block';
         this.success_message = `
           A <strong>${this.leveling_class}</strong> is a ${getClassRate(this.leveling_class).descr} leveling class.
           If you are playing an average of <strong>${this.hours_per_week} hours per week</strong> and your leveling speed is <strong>${this.leveling_speed}</strong> you will probably ding level 60 somewhere around...<p>${ding_date}</p>
@@ -29,12 +31,10 @@ var app = new Vue({
       }
       else {
         this.success_message = '';
-        let sm = document.querySelector('.success-message');
-        sm.style.display = 'none';
+        document.querySelector('.success-message').style.display = 'none';
 
-        let em = document.querySelector('.error-message');
-        em.style.display = 'block';
-
+        // Show error message
+        document.querySelector('.error-message').style.display = 'block';
         this.error_message = 'Please fill in all fields to get a calculation.';
       }
 
@@ -54,16 +54,13 @@ function calcDingDate(leveling_class, leveling_speed, hours_per_week, start_date
   if (class_rate.multiplier.length == 0 || class_rate.multiplier.length == 0) {
     return false;
   }
-  console.log(start_date);
 
   // Calc amount of days it will take to become 60
   days = class_rate.multiplier * (leveling_speed_hours / hours_per_week * 7);
   
   // Add days to starting date
   let date = new Date(start_date);
-  console.log('1', date);
   date.add(days).days();
-  console.log('2',date);
   return date.toString('dddd d MMMM yyyy');  
 }
 

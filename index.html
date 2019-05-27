@@ -64,9 +64,11 @@
       <input type="submit" class="submitter" value="Calculate">
     </form>
 
-    <div id="sm" class="success-message"><span v-html="success_message"></span></div>
+    <div id="messages-box">
+      <div class="success-message"><span v-html="success_message"></span></div>
 
-    <div class="error-message">{{ error_message }}</div>
+      <div class="error-message">{{ error_message }}</div>
+    </div>
   </div>
   <footer>
     <div class="content">
