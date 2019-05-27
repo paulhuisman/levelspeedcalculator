@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Language" content="en" />
+  <meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>WoW Classic | average leveling time and ding-date calculator</title>
+  <link rel="stylesheet" href="css/style.css">
+  <!--
+  www.wowclassicleveltimecalculator.com
+  -->
+</head>
+
+<body>
+  <div id="app">
+    <h1><img src="images/logo.png" alt="WoW Classic" title="WoW Classic"></h1>
+    <h2>when will you ding level 60 in WoW classic? let's calculate it!</h2>
+
+    <form @submit.prevent="calcLevelingTime">
+      <p>What class will you be playing?</p>
+      <div class="box">
+        <select v-model="leveling_class" placeholder="Select class">
+          <option value="">- select class -</option>
+          <option value="warrior">Warrior</option>
+          <option value="rogue">Rogue</option>
+          <option value="hunter">Hunter</option>
+          <option value="warlock">Warlock</option>
+          <option value="mage">Mage</option>
+          <option value="priest">Priest</option>
+          <option value="druid">Druid</option>
+          <option value="paladin">Paladin</option>
+          <option value="shaman">Shaman</option>
+        </select>
+      </div>
+
+      <p>How fast a leveler are you?</p>
+      <div class="box">
+        <select v-model="leveling_speed" placeholder="Leveling speed">
+          <option value="">- select leveling speed -</option>
+          <option value="slow">Very slow (you spend a lot of time in cities)</option>
+          <option value="slow">Slow (new to the game and/or enjoying quests)</option>
+          <option value="normal">Normal</option>
+          <option value="fast">Fast (leveling asap using guides)</option>
+          <option value="super-fast">Superfast (are you Joana?!)</option>
+        </select>
+      </div>
+
+      <p>How many hours a week (on average) will you be playing?</p>
+      <input type="number" v-model="hours_per_week" id="hours_per_week"
+        placeholder="Type in the hours per week you will be playing" min="1" max="168">
+
+      <p>When will you start playing WoW Classic?</p>
+
+      <input type="date" id="start" v-model="start_date" value="2019-08-27" min="2019-08-27" max="2020-08-27">
+      <input type="submit" class="submitter" value="Calculate">
+    </form>
+
+    <div id="sm" class="success-message"><span v-html="success_message"></span></div>
+
+    <div class="error-message">{{ error_message }}</div>
+  </div>
+  <footer>
+    <div class="content">
+      <strong>Created by Curu</strong><br /><br />
+      Calculations are obviously an estimate and are based on several sources. Rested XP bonus has not been taken into
+      consideration.<br /><br />
+      Class leveling time multipliers currently are: hunter (1.5x - fastest), druid (1.4x), warlock (1.3x), mage (1.3x),
+      shaman (1.15x), rogue (1.1x), paladin (1.05x), warrior (1x - slowest). These are an estimation (there is no real
+      data available) and can still change. A slow player will take about 18 days to level to 60, a normal player 14
+      days and a fast player 10 days.<br /><br />
+      Hosting is currently on Github Pages, so let's hope the bandwidth can keep up :)<br /><br />
+      Have some feedback? <a href="https://forms.gle/oQEjv3tW35xaK9SZ8" target="_blank">Let me know.</a>
+    </div>
+  </footer>
+
+  <script src="js/date.js" /></script>
+  <script src="js/vue.js" /></script>
+  <script src="js/project.js" /></script>
+</body>
+
+</html>
