@@ -97,7 +97,7 @@ function getClassRate(leveling_class) {
     },
     'priest': { 
       multiplier: 1.2,
-      descr: 'medium'
+      descr: 'medium-speed'
     },
     'shaman': {
       multiplier: 1.3,
