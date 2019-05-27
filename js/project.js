@@ -30,10 +30,9 @@ var app = new Vue({
         `;
 
         // Push event to GA
-        ga('send', 'event', {
-          eventCategory: 'Calculations',
-          eventAction: 'Done',
-          eventLabel: this.leveling_class + '-' + ding_date
+        gtag('event', 'Successful', {
+          'event_category': 'Calculate',
+          'event_label': this.leveling_class + '-' + ding_date
         });
       }
       else {
@@ -41,7 +40,6 @@ var app = new Vue({
         document.querySelector('.success-message').style.display = 'none';
 
         // Show error message
-        ga('send', 'event', 'CTA click', 'click', 'test');
         document.querySelector('.error-message').style.display = 'block';
         this.error_message = 'Please fill in all fields to get a calculation.';
       }
