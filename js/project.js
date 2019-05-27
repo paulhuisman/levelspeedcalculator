@@ -142,8 +142,8 @@ function getHoursNeeded(leveling_speed) {
   const leveling_speed_days = {
     'very-slow': 24,
     'slow': 17,
-    'normal': 13,
-    'fast': 9,
+    'normal': 12,
+    'fast': 8,
     'super-fast': 4.5
   }
 
