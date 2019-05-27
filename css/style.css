@@ -50,8 +50,16 @@ input {
   border-radius: 4px;
   background-color: #f2f2f2;
 }
+input:hover {
+  background-color: #e2e2e2;
+}
 input[type="date"] {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  display: block;
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  min-height: 1.2em; 
+  min-width: 90%;
 }
 input[type="submit"] {
   cursor: pointer;
