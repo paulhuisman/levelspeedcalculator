@@ -114,7 +114,7 @@ function getClassRate(leveling_class) {
       descr: 'medium-fast'
     },
     'priest': { 
-      multiplier: 1.1,
+      multiplier: 1.15,
       descr: 'medium-speed'
     },
     'shaman': {
@@ -122,7 +122,7 @@ function getClassRate(leveling_class) {
       descr: 'medium-slow'
     },
     'druid': {
-      multiplier: 1.05,
+      multiplier: 1.1,
       descr: 'fast'
     },
     'paladin': {
