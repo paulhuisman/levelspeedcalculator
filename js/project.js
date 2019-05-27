@@ -41,6 +41,7 @@ var app = new Vue({
         document.querySelector('.success-message').style.display = 'none';
 
         // Show error message
+        ga('send', 'event', 'CTA click', 'click', 'test');
         document.querySelector('.error-message').style.display = 'block';
         this.error_message = 'Please fill in all fields to get a calculation.';
       }
