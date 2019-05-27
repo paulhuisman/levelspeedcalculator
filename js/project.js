@@ -14,40 +14,58 @@ var app = new Vue({
       // Scroll to messages-box div (especially useful on mobile)
       var el = document.getElementById('submitter');
       el.scrollIntoView();
-    
-      if (this.leveling_class.length && this.leveling_speed.length && this.hours_per_week.length && this.start_date.length) {
-        // Remove error messages
-        this.error_message = '';
-        document.querySelector('.error-message').style.display = 'none';
-
-        // Calc ding date and show success message
-        let info = calcDingDate(this.leveling_class, this.leveling_speed, this.hours_per_week, this.start_date);
-        
-        document.querySelector('.success-message').style.display = 'block';
-        let day_months_info = info.months > 1 ? `${roundToOne(info.months)} months` : `${Math.round(info.days)} days`;
-        this.success_message = `
-          A <strong>${this.leveling_class}</strong> is a ${getClassRate(this.leveling_class).descr} leveling class.
-          If you are playing an average of <strong>${this.hours_per_week} hours per week</strong> and your leveling speed is <strong>${this.leveling_speed}</strong> you will probably ding level 60 somewhere around...<p>${info.ding_date_formatted}</p>
-          <span class="small">(this will be ${day_months_info} from when you start playing on ${info.start_date_formatted})</span>
-        `;
-
-        // Push event to GA
-        gtag('event', 'Successful', {
-          'event_category': 'Calculate',
-          'event_label': this.leveling_class + ' - ' + info.ding_date_formatted
-        });
+      
+      if(this.start_date.length == 0) {
+        this.error_message = toggleErrorMessage('Starting date cannot be empty.');
+        return;
       }
-      else {
-        this.success_message = '';
-        document.querySelector('.success-message').style.display = 'none';
-
-        // Show error message
-        document.querySelector('.error-message').style.display = 'block';
-        this.error_message = 'Please fill in all fields to get a calculation.';
+      else if(!this.start_date.match(/^\d{4}([./-])\d{2}\1\d{2}$/)) {
+        this.error_message = toggleErrorMessage('Date format should be YYYY-MM-DD.');
+        return;
       }
+      else if(this.start_date < '2019-08-27') {
+        this.error_message = toggleErrorMessage('Start date cannot be before release..');
+        return;
+      }
+      else if (this.leveling_class.length == 0 || this.leveling_speed.length == 0 || this.hours_per_week.length == 0) {
+        this.error_message = toggleErrorMessage('Please fill in all fields to get a calculation.');
+        return;
+      }
+      
+      // Remove error messages
+      this.error_message = '';
+      document.querySelector('.error-message').style.display = 'none';
+
+      // Calc ding date and show success message
+      let info = calcDingDate(this.leveling_class, this.leveling_speed, this.hours_per_week, this.start_date);
+      
+      document.querySelector('.success-message').style.display = 'block';
+      let day_months_info = info.months > 1 ? `${roundToOne(info.months)} months` : `${Math.round(info.days)} days`;
+      this.success_message = `
+        A <strong>${this.leveling_class}</strong> is a ${getClassRate(this.leveling_class).descr} leveling class.
+        If you are playing an average of <strong>${this.hours_per_week} hours per week</strong> and your leveling speed is <strong>${this.leveling_speed}</strong> you will probably ding level 60 somewhere around...<p>${info.ding_date_formatted}</p>
+        <span class="small">(this will be ${day_months_info} from when you start playing on ${info.start_date_formatted})</span>
+      `;
+
+      // Push event to GA
+      gtag('event', 'Successful', {
+        'event_category': 'Calculate',
+        'event_label': this.leveling_class + ' - ' + info.ding_date_formatted
+      });
     }
   }
 })
+
+function toggleErrorMessage(error_text) {
+  // Hide success message
+  this.success_message = '';
+  document.querySelector('.success-message').style.display = 'none';
+
+  // Show error message
+  document.querySelector('.error-message').style.display = 'block';
+
+  return error_text;
+}
 
 function calcDingDate(leveling_class, leveling_speed, hours_per_week, start_date) {
   let class_rate = getClassRate(leveling_class);
