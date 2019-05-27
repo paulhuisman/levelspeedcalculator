@@ -4,9 +4,9 @@ var app = new Vue({
     leveling_class: '',
     error_message: '',
     success_message: '',
-    leveling_class: 'warrior',
-    leveling_speed: 'normal',
-    hours_per_week: '4',
+    leveling_class: '',
+    leveling_speed: '',
+    hours_per_week: '',
     start_date: '2019-08-27',
   },
   methods: {
