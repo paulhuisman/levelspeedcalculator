@@ -23,8 +23,8 @@ var app = new Vue({
         sm = document.querySelector('.success-message');
         sm.style.display = 'block';
         this.success_message = `
-          A ${this.leveling_class} is a ${getClassRate(this.leveling_class).descr} leveling class.
-          If you are playing an average of ${this.hours_per_week} hours per week and your leveling speed is ${this.leveling_speed} you will ding level 60 on...<p>${ding_date}</p>
+          A <strong>${this.leveling_class}</strong> is a ${getClassRate(this.leveling_class).descr} leveling class.
+          If you are playing an average of <strong>${this.hours_per_week} hours per week</strong> and your leveling speed is <strong>${this.leveling_speed}</strong> you will probably ding level 60 somewhere around...<p>${ding_date}</p>
         `;
       }
       else {
@@ -70,11 +70,11 @@ function calcDingDate(leveling_class, leveling_speed, hours_per_week, start_date
 function getClassRate(leveling_class) {
   const rates = {
     'warrior': {
-      multiplier: 1.5,
+      multiplier: 1.4,
       descr: 'slow',
     },
     'rogue': {
-      multiplier: 1.4,
+      multiplier: 1.3,
       descr: 'medium-slow'
     },
     'hunter': {
@@ -82,19 +82,19 @@ function getClassRate(leveling_class) {
       descr: 'fast'
     },
     'warlock': {
-      multiplier: 1.2,
+      multiplier: 1.15,
       descr: 'medium-fast'
     },
     'mage': {
-      multiplier: 1.2,
+      multiplier: 1.15,
       descr: 'medium-fast'
     },
     'priest': { 
-      multiplier: 1.25,
+      multiplier: 1.2,
       descr: 'medium'
     },
-    'priest': {
-      multiplier: 1.35,
+    'shaman': {
+      multiplier: 1.3,
       descr: 'medium-slow'
     },
     'druid': {
@@ -102,7 +102,7 @@ function getClassRate(leveling_class) {
       descr: 'fast'
     },
     'paladin': {
-      multiplier: 1.45,
+      multiplier: 1.35,
       descr: 'slow'
     },
   };
