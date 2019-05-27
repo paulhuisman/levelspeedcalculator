@@ -16,7 +16,7 @@ html {
   height: 100%;
 }
 #app {
-  width: 95%;
+  width: 93%;
   margin: 0px auto;
 }
 @media only screen and (min-width: 600px) {
@@ -170,7 +170,7 @@ footer {
   line-height: 1rem;
 }
 footer .content {
-  width: 95%;
+  width: 100%;
   margin: 0 auto;
   text-align: center;
 }
