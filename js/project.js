@@ -51,7 +51,7 @@ var app = new Vue({
       // Push event to GA
       gtag('event', 'Successful', {
         'event_category': 'Calculate',
-        'event_label': this.leveling_class + ' - ' + info.ding_date_formatted
+        'event_label': this.leveling_class + ' - ' +  info.days + ' days'
       });
     }
   }
