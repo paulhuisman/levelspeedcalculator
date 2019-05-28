@@ -145,7 +145,7 @@ function getHoursNeeded(leveling_speed) {
     'slow': 15,
     'normal': 11,
     'fast': 8,
-    'super-fast': 4.5
+    'super-fast': 5
   }
 
   if (leveling_speed_days[leveling_speed]) {
