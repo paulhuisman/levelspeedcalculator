@@ -142,8 +142,8 @@ function getClassRate(leveling_class) {
 function getHoursNeeded(leveling_speed) {
   const leveling_speed_days = {
     'very-slow': 20,
-    'slow': 16,
-    'normal': 12,
+    'slow': 15,
+    'normal': 11,
     'fast': 8,
     'super-fast': 4.5
   }
