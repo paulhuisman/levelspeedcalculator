@@ -60,7 +60,7 @@ var app = new Vue({
         return false;
       }
 
-      return true
+      return true;
     },
     toggleErrorMessage(error_text) {
       // Hide success message
