@@ -11,33 +11,21 @@ var app = new Vue({
   },
   methods: {
     calcLevelingTime(skill) {
+      // Validate fields input
+      if(this.validateFields() == false) {
+        return;
+      }
+
       // Scroll to messages-box div (especially useful on mobile)
       var el = document.getElementById('submitter');
       el.scrollIntoView();
-      
-      if(this.start_date.length == 0) {
-        this.error_message = toggleErrorMessage('Starting date cannot be empty.');
-        return;
-      }
-      else if(!this.start_date.match(/^\d{4}([./-])\d{2}\1\d{2}$/)) {
-        this.error_message = toggleErrorMessage('Date format should be YYYY-MM-DD.');
-        return;
-      }
-      else if(this.start_date < '2019-08-26') {
-        this.error_message = toggleErrorMessage('Start date cannot be before release..');
-        return;
-      }
-      else if (this.leveling_class.length == 0 || this.leveling_speed.length == 0 || this.hours_per_week.length == 0) {
-        this.error_message = toggleErrorMessage('Please fill in all fields to get a calculation.');
-        return;
-      }
       
       // Remove error messages
       this.error_message = '';
       document.querySelector('.error-message').style.display = 'none';
 
       // Calc ding date and day_months_info
-      let info = calcDingDate(this.leveling_class, this.leveling_speed, this.hours_per_week, this.start_date);
+      let info = this.calcDingDate();
       let day_months_info = info.months > 1 ? `${roundToOne(info.months)} months` : `${Math.round(info.days)} days`;
       
       // Show success message with calculated info
@@ -53,44 +41,63 @@ var app = new Vue({
         'event_category': 'Calculate',
         'event_label': `${this.leveling_class} - ${Math.round(info.days)} days - ${info.ding_date_formatted}`
       });
+    },
+    validateFields() {
+      if(this.start_date.length == 0) {
+        this.error_message = this.toggleErrorMessage('Starting date cannot be empty.');
+        return false;
+      }
+      else if(!this.start_date.match(/^\d{4}([./-])\d{2}\1\d{2}$/)) {
+        this.error_message = this.toggleErrorMessage('Date format should be YYYY-MM-DD.');
+        return false;
+      }
+      else if(this.start_date < '2019-08-26') {
+        this.error_message = this.toggleErrorMessage('Start date cannot be before release..');
+        return false;
+      }
+      else if (this.leveling_class.length == 0 || this.leveling_speed.length == 0 || this.hours_per_week.length == 0) {
+        this.error_message = this.toggleErrorMessage('Please fill in all fields to get a calculation.');
+        return false;
+      }
+
+      return true
+    },
+    toggleErrorMessage(error_text) {
+      // Hide success message
+      this.success_message = '';
+      document.querySelector('.success-message').style.display = 'none';
+
+      // Show error message
+      document.querySelector('.error-message').style.display = 'block';
+
+      return error_text;
+    },
+    calcDingDate() {
+      let class_rate = getClassRate(this.leveling_class);
+      let leveling_speed_hours = getHoursNeeded(this.leveling_speed);
+
+      if (class_rate.multiplier.length == 0 || class_rate.multiplier.length == 0) {
+        return false;
+      }
+
+      // Calc amount of days it will take to become 60
+      days = class_rate.multiplier * (leveling_speed_hours / this.hours_per_week * 7);
+      
+      // Add days to starting date
+      let date = new Date(this.start_date);
+      date.add(days).days();
+
+      return {
+        start_date_formatted: new Date(this.start_date).toString('d MMMM yyyy'),
+        ding_date_formatted: date.toString('dddd d MMMM yyyy'),
+        // month average is 30,4
+        months: days / 30.4,
+        days: days
+      };
     }
+
   }
 })
-
-function toggleErrorMessage(error_text) {
-  // Hide success message
-  this.success_message = '';
-  document.querySelector('.success-message').style.display = 'none';
-
-  // Show error message
-  document.querySelector('.error-message').style.display = 'block';
-
-  return error_text;
-}
-
-function calcDingDate(leveling_class, leveling_speed, hours_per_week, start_date) {
-  let class_rate = getClassRate(leveling_class);
-  let leveling_speed_hours = getHoursNeeded(leveling_speed);
-
-  if (class_rate.multiplier.length == 0 || class_rate.multiplier.length == 0) {
-    return false;
-  }
-
-  // Calc amount of days it will take to become 60
-  days = class_rate.multiplier * (leveling_speed_hours / hours_per_week * 7);
-  
-  // Add days to starting date
-  let date = new Date(start_date);
-  date.add(days).days();
-
-  return {
-    start_date_formatted: new Date(start_date).toString('d MMMM yyyy'),
-    ding_date_formatted: date.toString('dddd d MMMM yyyy'),
-    // month average is 30,4
-    months: days / 30.4,
-    days: days
-  };
-}
 
 function getClassRate(leveling_class) {
   const rates = {
