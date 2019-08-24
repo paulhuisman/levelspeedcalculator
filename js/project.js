@@ -11,15 +11,15 @@ var app = new Vue({
   },
   methods: {
     calcLevelingTime(skill) {
+      // Scroll to messages-box div (especially useful on mobile)
+      var el = document.getElementById('submitter');
+      el.scrollIntoView();
+
       // Validate fields input
       if(this.validateFields() == false) {
         return;
       }
 
-      // Scroll to messages-box div (especially useful on mobile)
-      var el = document.getElementById('submitter');
-      el.scrollIntoView();
-      
       // Remove error messages
       this.error_message = '';
       document.querySelector('.error-message').style.display = 'none';
