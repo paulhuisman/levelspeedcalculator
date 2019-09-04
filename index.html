@@ -75,12 +75,29 @@
       </div>
 
       <p>How many hours a week (on average) will you be playing?</p>
-      <input type="number" v-model="hours_per_week" id="hours_per_week"
+      <input type="number" v-model="hours_per_week" id="hours_per_week" required
         placeholder="Type in the hours per week you will be playing" min="1" max="168">
 
-      <p>When will you start playing WoW Classic?</p>
 
-      <input type="date" id="start" v-model="start_date" value="2019-08-27" min="2019-08-26" max="2020-08-27">
+      <p>Are you already playing the game?</p>
+      <div class="box">
+        <select v-model="already_playing" placeholder="Already playing?">
+          <option value="0">No</option>
+          <option value="1">Yes</option>
+        </select>
+      </div>
+
+      <div v-if="this.already_playing == 0">
+        <p>When will you start playing WoW Classic?</p>
+
+        <input type="date" id="start" v-model="start_date" value="2019-08-27" min="2019-08-26" max="2020-08-27">
+      </div>
+      <div v-else-if="this.already_playing == 1">
+        <p>Which level are you?</p>
+        <input type="number" v-model="current_level" id="current_level" required
+          placeholder="Type in the your current level" min="1" max="59">
+      </div>
+
       <input type="submit" id="submitter" value="Calculate">
     </form>
 
