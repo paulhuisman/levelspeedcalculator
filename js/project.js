@@ -6,7 +6,7 @@ var app = new Vue({
     success_message: '',
     leveling_class: '',
     leveling_speed: '',
-    already_playing: 0,
+    already_playing: 1,
     current_level: '',
     hours_per_week: '',
     start_date: currentDate(),
