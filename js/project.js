@@ -47,10 +47,18 @@ var app = new Vue({
       this.success_message = message
 
       // Push event to GA
-      gtag('event', 'Successful', {
-        'event_category': 'Calculate',
-        'event_label': `${this.leveling_class} - ${Math.round(info.days)} days - ${info.ding_date_formatted} (playing: ${this.already_playing})`
-      });
+      if(this.already_playing == 0) {
+        gtag('event', 'Successful', {
+          'event_category': 'Calculate',
+          'event_label': `${this.leveling_class} - ${Math.round(info.days)} days - ${info.ding_date_formatted}`
+        });
+      }
+      else {
+        gtag('event', 'Successful', {
+          'event_category': 'Calculate - playing',
+          'event_label': `${this.leveling_class} - ${Math.round(info.days)} days - ${info.ding_date_formatted} (current level: ${this.current_level})`
+        });
+      }
     },
     validateFields() {
       if(this.start_date.length == 0) {
