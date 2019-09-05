@@ -9,7 +9,7 @@ var app = new Vue({
     already_playing: 0,
     current_level: '',
     hours_per_week: '',
-    start_date: '2019-08-27',
+    start_date: currentDate(),
   },
   methods: {
     calcLevelingTime(skill) {
@@ -273,4 +273,17 @@ function getHoursNeeded(leveling_speed) {
 
 function roundToOne(num) {    
   return +(Math.round(num + "e+1")  + "e-1");
+}
+
+
+function currentDate() {
+  var d = new Date(),
+  month = '' + (d.getMonth() + 1),
+  day = '' + d.getDate(),
+  year = d.getFullYear();
+
+  if (month.length < 2) month = '0' + month;
+  if (day.length < 2) day = '0' + day;
+
+  return [year, month, day].join('-');
 }
