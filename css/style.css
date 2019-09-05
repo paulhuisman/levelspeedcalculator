@@ -48,6 +48,8 @@ input {
   padding: 16px 12px;
   width: calc(100% - 24px);
   border: 0;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
   border-radius: 4px;
   background-color: #f2f2f2;
   color: #151516;
@@ -72,6 +74,8 @@ input[type="submit"] {
   margin: 30px 0 26px;
   border: 0;
   background-color: #aaa;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
   border-radius: 4px;
   font-size: 1.3rem;
   font-weight: bold;
@@ -187,6 +191,8 @@ footer a {
 .error-message {
   display: none;
   background-color: #cc0000;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
   border-radius: 4px;
   color: #fff;
   text-align: center;
@@ -208,6 +214,8 @@ footer a {
   background-image: -ms-linear-gradient(top, #13527e, #176ba6);
   background-image: -o-linear-gradient(top, #13527e, #176ba6);
   background-image: linear-gradient(to bottom, #13527e, #176ba6);
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
   border-radius: 4px;
   text-align: center;
   padding: 20px 16px;
