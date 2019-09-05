@@ -41,7 +41,7 @@ var app = new Vue({
         message += `<span class="small">(this will be ${day_months_info} from when you start playing on ${info.start_date_formatted})</span>`; 
       }
       else {
-        message += `<span class="small">(this will be ${day_months_info} from today - ${info.today_date_formatted})</span>`;
+        message += `<span class="small">(this will be ${day_months_info} from today)</span>`;
       }
 
       this.success_message = message
