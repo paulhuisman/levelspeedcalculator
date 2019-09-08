@@ -32,9 +32,13 @@ var app = new Vue({
       
       // Show success message with calculated info
       document.querySelector('.success-message').style.display = 'block';
-      message = `
+      let message = ''
+      if(this.already_playing == 1) {
+        message += `<p>Congratulations, you're now <strong>${info.percentage}%</strong> of the way to <strong>level 60</strong>.</p>`;
+      }
+      message += `
         A <strong>${this.leveling_class}</strong> is a ${getClassRate(this.leveling_class).descr} leveling class.
-        If you are playing an average of <strong>${this.hours_per_week} hours per week</strong> and your leveling speed is <strong>${this.leveling_speed}</strong> you will probably ding level 60 somewhere around...<p>${info.ding_date_formatted}</p>
+        If you are playing an average of <strong>${this.hours_per_week} hours per week</strong> and your leveling speed is <strong>${this.leveling_speed}</strong> you will probably ding level 60 somewhere around...<h2>${info.ding_date_formatted}</h2>
       `;
 
       if(this.already_playing == 0) {
@@ -92,6 +96,7 @@ var app = new Vue({
     },
     calcDingDate() {
       let dingDate = null;
+      let percentage = null
       let class_rate = getClassRate(this.leveling_class);
       let leveling_speed_hours = getHoursNeeded(this.leveling_speed);
 
@@ -111,7 +116,7 @@ var app = new Vue({
       else {
         // Player is already playing: calc amount of days it will take to become 60
         days = class_rate.multiplier * (leveling_speed_hours / this.hours_per_week * 7);
-        let percentage = getPercentageDone(this.current_level);
+        percentage = getPercentageDone(this.current_level);
         
         if(percentage !== false) {
           let daysDone = (percentage * days) / 100;
@@ -130,7 +135,8 @@ var app = new Vue({
         today_date_formatted: new Date().toString('dddd d MMMM yyyy'),
         // month average is 30,4
         months: days / 30.4,
-        days: days
+        days: days,
+        percentage: percentage
       };
     }
   }
@@ -237,8 +243,8 @@ function getPercentageDone(current_level) {
     49: 61.9,
     50: 64.5,
     51: 68.3,
-    52: 71.5,
-    53: 75, // Three-quarter way
+    52: 72,
+    53: 75.5, // Three-quarter way
     54: 79.5,
     55: 82,
     56: 85,

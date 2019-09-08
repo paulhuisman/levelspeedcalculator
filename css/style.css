@@ -231,6 +231,11 @@ footer a {
   -ms-animation: fade-in ease 200ms;
 }
 .success-message p {
+  margin-top: 0px;
+}
+.success-message h2 {
+  margin-top: 1.4rem;
+  color: #fff;
   clear: both;
   font-weight: bold;
   display: block;
