@@ -27,7 +27,13 @@ html {
 }
 h1 {
   margin: 6px 0 0 0;
-  min-height: 181px;
+  min-height: 150px;
+  @media only screen and (min-width: 600px) {
+    min-height: 181px;
+  }
+  @media only screen and (min-width: 1024px) {
+    min-height: 210px;
+  }
 }
 h1 img {
   max-width: 100%;
