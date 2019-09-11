@@ -34,7 +34,7 @@ var app = new Vue({
       document.querySelector('.success-message').style.display = 'block';
       let message = ''
       if(this.already_playing == 1) {
-        message += `<p>Congratulations, you're now <strong>${info.percentage}%</strong> of the way to <strong>level 60</strong>.</p>`;
+        message += `<p>Congratulations, you're now <strong>${info.percentage}%</strong> of the way to level 60.</p>`;
       }
       message += `
         A <strong>${this.leveling_class}</strong> is a ${getClassRate(this.leveling_class).descr} leveling class.
